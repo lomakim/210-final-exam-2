@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <deque>
+#include <vector>
 using namespace std;
 
 class LinkedList {
@@ -74,7 +75,7 @@ class LinkedList {
 int main() {
     srand(time(0));
     ifstream fin;
-    const int N_SIZE = 50, C_SIZE = 15;
+    const int N_SIZE = 50, C_SIZE = 15, B_SIZE = 5;
     int tempN, prob;
     string tempS, tempS2;
     string names[N_SIZE];
@@ -85,6 +86,8 @@ int main() {
                                "chocolate chip", "double chocolate",
                                "pumpkin spice", "peanut butter", "plain",
                                "cinnamon", "zucchini", "lemon", "raspberry"};
+    vector<string> braceletQueue;
+    string bracelets[B_SIZE] = {"blue", "green", "pink", "red", "black"};
     LinkedList coffeeQueue;
 
     //READ NAMES INTO ARRAY FROM FILE
@@ -105,6 +108,7 @@ int main() {
 
     //INITIALIZE QUEUES
     cout << "Starting Queues: " << endl;
+
     //COFFEE
     cout << "\nCoffee Queue:" << endl;
     for (int i = 0; i < 3; i++) {
@@ -115,11 +119,22 @@ int main() {
         cout << "\t";
         coffeeQueue.push_back(tempS, tempS2);
     }
+
+    //MUFFIN
     cout << "\nMuffin Queue" << endl;
     for (int i = 0; i < 3; i++) {
         tempN = rand() % N_SIZE;
         tempS = names[tempN];
         muffinQueue.push_back(tempS);
+        cout << "\t" << tempS << " has joined the line." << endl;
+    }
+
+    //BRACELET
+    cout << "\n\nFriendship Bracelet Queue: " << endl;
+    for (int i = 0; i < 3; i++) {
+        tempN = rand() % N_SIZE;
+        tempS = names[tempN];
+        braceletQueue.push_back(tempS);
         cout << "\t" << tempS << " has joined the line." << endl;
     }
     cout << endl;
@@ -166,6 +181,35 @@ int main() {
         else {
             for (int i = 0; i < muffinQueue.size(); i++) {
                 cout << "\t\t" << muffinQueue[i] << endl;
+            }
+        }
+
+        prob = (rand() % 100) + 1;
+        cout << "\n\tBracelet Queue: ";
+        if (prob <= 50) {
+            if (braceletQueue.empty()) {
+                cout << "\t\tLine is empty." << endl;
+            }
+            else {
+            tempN = rand() % B_SIZE;
+            cout << braceletQueue[0] << " has purchased their "
+                 << bracelets[tempN] << " bracelet." << endl;
+            braceletQueue.erase(braceletQueue.begin());
+            }
+        }
+        else {
+            tempN = rand() % N_SIZE;
+            tempS = names[tempN];
+            braceletQueue.push_back(tempS);
+            cout << tempS << " has joined the line" << endl;
+        }
+        cout << "\tResulting Line: " << endl;
+        if(braceletQueue.empty()) {
+            cout << "\t\tLine is empty." << endl;
+        }
+        else {
+            for (int i = 0; i < braceletQueue.size(); i++) {
+                cout << "\t\t" << braceletQueue[i] << endl;
             }
         }
     }
