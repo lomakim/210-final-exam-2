@@ -3,6 +3,7 @@
 #include <fstream>
 using namespace std;
 
+private:
 struct Node {
     string name, order;
     Node *next;
@@ -47,6 +48,9 @@ int main() {
             newCust->name = names[tempN - 1];
             tempN = (rand() % C_SIZE) + 1;
             newCust->order = coffees[tempN - 1];
+        }
+        else {
+            newCust->next
         }
     }
     
