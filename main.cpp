@@ -1,6 +1,7 @@
 // COMSC210 | Final Exam 2 | Loma Kim
 #include <iostream>
 #include <fstream>
+#include <deque>
 using namespace std;
 
 class LinkedList {
@@ -78,6 +79,12 @@ int main() {
     string tempS, tempS2;
     string names[N_SIZE];
     string coffees[C_SIZE];
+    deque<string> muffinQueue;
+    string muffins[C_SIZE] = { "blueberry", "poppy seed", "bran", 
+                               "banana walnut", "carrot", "strawberry",
+                               "chocolate chip", "double chocolate",
+                               "pumpkin spice", "peanut butter", "plain",
+                               "cinnamon", "zucchini", "lemon", "raspberry"};
     LinkedList coffeeQueue;
 
     //READ NAMES INTO ARRAY FROM FILE
@@ -96,8 +103,8 @@ int main() {
     }
     fin.close();
 
-    //INITIALIZE QUEUE
-    cout << "Starting line: " << endl;
+    //INITIALIZE QUEUES
+    cout << "Starting Coffee line: " << endl;   //COFFEE
     for (int i = 0; i < 3; i++) {
         tempN = rand() % N_SIZE;
         tempS = names[tempN];
@@ -107,6 +114,13 @@ int main() {
         coffeeQueue.push_back(tempS, tempS2);
     }
     cout << endl;
+    
+    for (int i = 0; i < 3; i++) {
+        tempN = rand() % N_SIZE;
+        tempS = names[tempN];
+    
+
+    return 0;
 
     for (int i = 0; i < 10; i++){
         cout << "Round " << i + 1 << ": "; 
@@ -123,8 +137,4 @@ int main() {
         }
         coffeeQueue.print();
     }
-
-    
-
-    return 0;
 }
