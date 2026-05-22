@@ -35,10 +35,10 @@ class LinkedList {
             }
             else {
                 head = tail = nullptr;
-                cout << "\t" << temp->name << " is served their " 
-                    << temp->order << ". " << endl;
-                delete temp;
             }
+            cout << temp->name << " is served their " 
+                 << temp->order << ". " << endl;
+            delete temp;
         }
     }
 
@@ -52,18 +52,18 @@ class LinkedList {
             newNode->prev = tail;
             tail = newNode;
         }
-        cout << "\t" << newNode->name << " has joined the line." << endl;
+        cout << newNode->name << " has joined the line." << endl;
     }
 
     void print() {
     Node* current = head;
-    cout << "\n\tResulting Line: ";
+    cout << "\tResulting Line: " << endl;
     if (!current) {
-        cout << "Line is empty." << endl;
+        cout << "\t\tLine is empty." << endl << endl;
         return;
     }
     while (current) {
-        cout << "\n\t\t" << current->name << endl;
+        cout << "\t\t" << current->name << endl;
         current = current->next;
     }
     cout << endl;
@@ -103,10 +103,13 @@ int main() {
         tempS = names[tempN];
         tempN = rand() % C_SIZE;
         tempS2 = coffees[tempN];
+        cout << "\t";
         coffeeQueue.push_back(tempS, tempS2);
     }
+    cout << endl;
+
     for (int i = 0; i < 10; i++){
-        cout << "Round # " << i + 1 << ": " << endl; 
+        cout << "Round " << i + 1 << ": "; 
         prob = (rand() % 100) + 1;
         if (prob <= 50) {
             tempN = rand() % N_SIZE;
@@ -118,6 +121,7 @@ int main() {
         else {
             coffeeQueue.pop_front();
         }
+        coffeeQueue.print();
     }
 
     
