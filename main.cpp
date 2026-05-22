@@ -26,22 +26,25 @@ class LinkedList {
             cout << "Line is empty.";
             return;
         }
-        Node* temp = head;
-        if(head->next) {
-            head = head->next;
-            head->prev = nullptr;
-        }
+
         else {
-            head = tail = nullptr;
-            cout << temp->name << " is served their " 
-                 << temp->order << ". " << endl;
-            delete temp;
+            Node* temp = head;
+            if(head->next) {
+                head = head->next;
+                head->prev = nullptr;
+            }
+            else {
+                head = tail = nullptr;
+                cout << "\t" << temp->name << " is served their " 
+                    << temp->order << ". " << endl;
+                delete temp;
+            }
         }
     }
 
     void push_back(string n, string o) {
         Node* newNode = new Node(n, o);
-        if(!tail) {
+        if(!head) {
             head = tail = newNode;
         }
         else {
@@ -49,18 +52,18 @@ class LinkedList {
             newNode->prev = tail;
             tail = newNode;
         }
-        cout << newNode->name << " has joined the line." << endl;
+        cout << "\t" << newNode->name << " has joined the line." << endl;
     }
 
     void print() {
     Node* current = head;
-    cout << "\nResulting Line: " << endl;
+    cout << "\n\tResulting Line: ";
     if (!current) {
-        cout << "\tLine is empty." << endl;
+        cout << "Line is empty." << endl;
         return;
     }
     while (current) {
-        cout << "\t" << current->name << endl;
+        cout << "\n\t\t" << current->name << endl;
         current = current->next;
     }
     cout << endl;
@@ -71,7 +74,7 @@ int main() {
     srand(time(0));
     ifstream fin;
     const int N_SIZE = 50, C_SIZE = 15;
-    int tempN;
+    int tempN, prob;
     string tempS, tempS2;
     string names[N_SIZE];
     string coffees[C_SIZE];
@@ -94,6 +97,7 @@ int main() {
     fin.close();
 
     //INITIALIZE QUEUE
+    cout << "Starting line: " << endl;
     for (int i = 0; i < 3; i++) {
         tempN = rand() % N_SIZE;
         tempS = names[tempN];
@@ -101,7 +105,21 @@ int main() {
         tempS2 = coffees[tempN];
         coffeeQueue.push_back(tempS, tempS2);
     }
-    coffeeQueue.print();
+    for (int i = 0; i < 10; i++){
+        cout << "Round # " << i + 1 << ": " << endl; 
+        prob = (rand() % 100) + 1;
+        if (prob <= 50) {
+            tempN = rand() % N_SIZE;
+            tempS = names[tempN];
+            tempN = rand() % C_SIZE;
+            tempS2 = coffees[tempN];
+            coffeeQueue.push_back(tempS, tempS2);
+        } 
+        else {
+            coffeeQueue.pop_front();
+        }
+    }
+
     
 
     return 0;
