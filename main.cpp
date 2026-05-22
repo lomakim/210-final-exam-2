@@ -104,7 +104,9 @@ int main() {
     fin.close();
 
     //INITIALIZE QUEUES
-    cout << "Starting Coffee line: " << endl;   //COFFEE
+    cout << "Starting Queues: " << endl;
+    //COFFEE
+    cout << "\nCoffee Queue:" << endl;
     for (int i = 0; i < 3; i++) {
         tempN = rand() % N_SIZE;
         tempS = names[tempN];
@@ -113,18 +115,19 @@ int main() {
         cout << "\t";
         coffeeQueue.push_back(tempS, tempS2);
     }
-    cout << endl;
-    
+    cout << "\nMuffin Queue" << endl;
     for (int i = 0; i < 3; i++) {
         tempN = rand() % N_SIZE;
         tempS = names[tempN];
-    
-
-    return 0;
+        muffinQueue.push_back(tempS);
+        cout << "\t" << tempS << " has joined the line." << endl;
+    }
+    cout << endl;
 
     for (int i = 0; i < 10; i++){
-        cout << "Round " << i + 1 << ": "; 
+        cout << "Round " << i + 1 << ": " << endl; 
         prob = (rand() % 100) + 1;
+        cout << "Coffee Queue: ";
         if (prob <= 50) {
             tempN = rand() % N_SIZE;
             tempS = names[tempN];
@@ -136,5 +139,20 @@ int main() {
             coffeeQueue.pop_front();
         }
         coffeeQueue.print();
+
+        prob = (rand() % 100) + 1;
+        cout << "Muffin Queue: ";
+        if (prob <= 50) {
+            if (muffinQueue.empty()) {
+                cout << "Line is empty." << enld;
+            }
+            else {
+            tempN = rand() % C_SIZE;
+            cout << muffinQueue[0] << " has been served their "
+                 << muffins[tempN] << " muffin.";
+            muffinQueue.pop_front();
+        }
     }
+
+    return 0;
 }
