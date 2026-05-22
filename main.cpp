@@ -9,8 +9,10 @@ struct Node {
 };
 
 int main() {
+    srand(time(0));
     ifstream fin;
     const int N_SIZE = 50, C_SIZE = 15;
+    int tempN;
     string tempS;
     string names[N_SIZE];
     string coffees[C_SIZE];
@@ -33,6 +35,21 @@ int main() {
         cout << coffees[i] << endl;
     }
     fin.close();
+
+    //INITIALIZE QUEUE
+    for (int i = 0; i < 3; i++) {
+        Node *newCust = new Node;
+
+        if(!head) {
+            head = newCust;
+            newCust->next = nullptr;
+            tempN = (rand() % N_SIZE) + 1;
+            newCust->name = names[tempN - 1];
+            tempN = (rand() % C_SIZE) + 1;
+            newCust->order = coffees[tempN - 1];
+        }
+    }
+    
 
     return 0;
 }
