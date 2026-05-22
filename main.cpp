@@ -9,11 +9,18 @@ class LinkedList {
         string name, order;
         Node* next;
         Node* prev;
+        Node(string n, string o) {
+            name = n;
+            order = o;
+            prev = next = nullptr;
+        }
     };
     Node* head;
     Node* tail;
 
     public: 
+    LinkedList() { head = tail = nullptr;}
+
     void pop_front() {
         if(!head) {
             cout << "Line is empty.";
@@ -32,9 +39,32 @@ class LinkedList {
         }
     }
 
-    void push_back() {
-        
+    void push_back(string n, string o) {
+        Node* newNode = new Node(n, o);
+        if(!tail) {
+            head = tail = newNode;
+        }
+        else {
+            tail->next = newNode;
+            newNode->prev = tail;
+            tail = newNode;
+        }
+        cout << newNode->name << " has joined the line." << endl;
     }
+
+    void print() {
+    Node* current = head;
+    cout << "\nResulting Line: " << endl;
+    if (!current) {
+        cout << "\tLine is empty." << endl;
+        return;
+    }
+    while (current) {
+        cout << "\t" << current->name << endl;
+        current = current->next;
+    }
+    cout << endl;
+}
 };
 
 int main() {
@@ -42,17 +72,16 @@ int main() {
     ifstream fin;
     const int N_SIZE = 50, C_SIZE = 15;
     int tempN;
-    string tempS;
+    string tempS, tempS2;
     string names[N_SIZE];
     string coffees[C_SIZE];
-    Node *head = nullptr;
+    LinkedList coffeeQueue;
 
     //READ NAMES INTO ARRAY FROM FILE
     fin.open("names.txt");
     for (int i = 0; i < N_SIZE; i++) {
         getline(fin, tempS);
         names[i] = tempS;
-        cout << names[i] << endl;
     }
     fin.close();
 
@@ -61,26 +90,18 @@ int main() {
     for (int i = 0; i < C_SIZE; i++) {
         getline(fin, tempS);
         coffees[i] = tempS;
-        cout << coffees[i] << endl;
     }
     fin.close();
 
     //INITIALIZE QUEUE
     for (int i = 0; i < 3; i++) {
-        Node *newCust = new Node;
-
-        if(!head) {
-            head = newCust;
-            newCust->next = nullptr;
-            tempN = (rand() % N_SIZE) + 1;
-            newCust->name = names[tempN - 1];
-            tempN = (rand() % C_SIZE) + 1;
-            newCust->order = coffees[tempN - 1];
-        }
-        else {
-            newCust->next
-        }
+        tempN = rand() % N_SIZE;
+        tempS = names[tempN];
+        tempN = rand() % C_SIZE;
+        tempS2 = coffees[tempN];
+        coffeeQueue.push_back(tempS, tempS2);
     }
+    coffeeQueue.print();
     
 
     return 0;
