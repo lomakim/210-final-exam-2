@@ -124,10 +124,10 @@ int main() {
     }
     cout << endl;
 
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++) {
         cout << "Round " << i + 1 << ": " << endl; 
         prob = (rand() % 100) + 1;
-        cout << "Coffee Queue: ";
+        cout << "\tCoffee Queue: ";
         if (prob <= 50) {
             tempN = rand() % N_SIZE;
             tempS = names[tempN];
@@ -141,16 +141,32 @@ int main() {
         coffeeQueue.print();
 
         prob = (rand() % 100) + 1;
-        cout << "Muffin Queue: ";
+        cout << "\tMuffin Queue: ";
         if (prob <= 50) {
             if (muffinQueue.empty()) {
-                cout << "Line is empty." << enld;
+                cout << "Line is empty." << endl;
             }
             else {
             tempN = rand() % C_SIZE;
             cout << muffinQueue[0] << " has been served their "
-                 << muffins[tempN] << " muffin.";
+                 << muffins[tempN] << " muffin." << endl;
             muffinQueue.pop_front();
+            }
+        }
+        else {
+            tempN = rand() % N_SIZE;
+            tempS = names[tempN];
+            muffinQueue.push_back(tempS);
+            cout << tempS << " has joined the line" << endl;
+        }
+        cout << "\tResulting Line: " << endl;
+        if(muffinQueue.empty()) {
+            cout << "Line is empty." << endl;
+        }
+        else {
+            for (int i = 0; i < muffinQueue.size(); i++) {
+                cout << "\t\t" << muffinQueue[i] << endl;
+            }
         }
     }
 
