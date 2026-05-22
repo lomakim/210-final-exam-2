@@ -3,10 +3,38 @@
 #include <fstream>
 using namespace std;
 
-private:
-struct Node {
-    string name, order;
-    Node *next;
+class LinkedList {
+    private:
+    struct Node {
+        string name, order;
+        Node* next;
+        Node* prev;
+    };
+    Node* head;
+    Node* tail;
+
+    public: 
+    void pop_front() {
+        if(!head) {
+            cout << "Line is empty.";
+            return;
+        }
+        Node* temp = head;
+        if(head->next) {
+            head = head->next;
+            head->prev = nullptr;
+        }
+        else {
+            head = tail = nullptr;
+            cout << temp->name << " is served their " 
+                 << temp->order << ". " << endl;
+            delete temp;
+        }
+    }
+
+    void push_back() {
+        
+    }
 };
 
 int main() {
